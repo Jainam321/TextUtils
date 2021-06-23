@@ -1,0 +1,75 @@
+{% extends 'basic.html' %}
+{% block title%}TextUtils{% endblock %}
+{% block body %}
+
+<span id="alertMsg">
+  <div class="alert alert-success alert-dismissible fade show my-2 mx-2" role="alert">
+    <strong>Welcome to TextUtils</strong> You can do many things with your text here!!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</span>
+
+  <br>
+
+  <div class="container">
+
+    <form class="was-validated" action="/analyze" method="post"> {% csrf_token %}
+
+      <div class="mb-3">
+    <label for="validationTextarea" class="form-label">Enter your text here and let TextUtils do the magic</label>
+    <textarea name="text" class="form-control is-invalid" id="validationTextarea" rows="7" required></textarea>
+  </div>
+
+      <div class="form-check form-switch">
+  <input name="removepunc" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1">
+  <label class="form-check-label" for="flexSwitchCheckDefault1">Remove Punctuations</label>
+</div>
+
+      <div class="form-check form-switch">
+  <input name="fullcaps" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2">
+  <label class="form-check-label" for="flexSwitchCheckDefault2">Capitalize All</label>
+</div>
+
+      <div class="form-check form-switch">
+  <input name="newlineremover" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault3">
+  <label class="form-check-label" for="flexSwitchCheckDefault3">Remove new line</label>
+</div>
+
+      <div class="form-check form-switch">
+  <input name="extraspaceremover" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault4">
+  <label class="form-check-label" for="flexSwitchCheckDefault4">Remove Extra space</label>
+</div>
+
+       <div class="form-check form-switch">
+  <input name="charcount" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault5">
+  <label class="form-check-label" for="flexSwitchCheckDefault5">Count total characters</label>
+</div>
+    <br>
+
+    <input class="btn btn-primary" type="submit" value="Analyze Text">
+      </form>
+
+  </div>
+
+  <!-- Changed -->
+
+{% endblock %}
+
+
+{% block js %} 
+
+<script type="text/javascript">
+
+if ("{{msg}}" == "error") {
+
+document.getElementById('alertMsg').innerHTML = (`<div class="alert alert-danger alert-dismissible fade show my-2 mx-2" role="alert">
+    <strong>You have not selected any of the analyzing feature!!</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>`);
+
+}
+
+</script>
+
+{% endblock %}
+
